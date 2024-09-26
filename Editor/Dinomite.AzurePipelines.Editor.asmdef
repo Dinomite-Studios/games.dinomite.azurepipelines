@@ -1,6 +1,6 @@
 {
-    "name": "Dinomite.AzurePipelines",
-    "rootNamespace": "Dinomite.AzurePipelines",
+    "name": "Dinomite.AzurePipelines.Editor",
+    "rootNamespace": "Dinomite.AzurePipelines.Editor",
     "references": [],
     "includePlatforms": [
         "Editor"

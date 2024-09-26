@@ -2,7 +2,7 @@ namespace Dinomite.AzurePipelines
 {
     public static class Utilities
     {
-        internal static bool TryGetCommandLineArgumentValue(string argumentName, out string value)
+        public static bool TryGetCommandLineArgumentValue(string argumentName, out string value)
         {
             var commandLineArguments = System.Environment.GetCommandLineArgs();
 
