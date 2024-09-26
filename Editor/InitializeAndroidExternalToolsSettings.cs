@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEditor.Android;
 
 namespace Dinomite.AzurePipelines
@@ -30,6 +31,8 @@ namespace Dinomite.AzurePipelines
             {
                 AndroidExternalToolsSettings.gradlePath = androidGradlePath;
             }
+
+            EditorApplication.Exit(0);
         }
     }
 }
