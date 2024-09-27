@@ -2,7 +2,7 @@
   "name": "games.dinomite.azurepipelines",
   "displayName": "Dinomite.AzurePipelines",
   "description": "A Unity package containing build scripts for use with the Unity Tools for Azure DevOps extension.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "unity": "2018.0",
   "author": "Dinomite",
   "keywords": [
