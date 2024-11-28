@@ -18,10 +18,8 @@ public static class AzurePipelinesBuild
         if (!Dinomite.AzurePipelines.Utilities.TryGetCommandLineArgumentValue(OutputPathArgument, out var locationPathName) ||
             !Dinomite.AzurePipelines.Utilities.TryGetCommandLineArgumentValue(OutputFileNameArgument, out var outputFileName))
         {
-            locationPathName = "Build";
-            outputFileName = "drop";
-            // EditorApplication.Exit(1);
-            // return;
+            EditorApplication.Exit(1);
+            return;
         }
 
         try
