@@ -3,8 +3,6 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEditor.Android;
-
 
 #if UNITY_2018_1_OR_NEWER
 using UnityEditor.Build.Reporting;
@@ -24,15 +22,10 @@ public static class AzurePipelinesBuild
             return;
         }
 
-        AndroidExternalToolsSettings.jdkRootPath = null;
-        AndroidExternalToolsSettings.sdkRootPath = null;
-        AndroidExternalToolsSettings.ndkRootPath = null;
-        AndroidExternalToolsSettings.gradlePath = null;
-
         try
         {
             EditorBuildSettingsScene[] editorConfiguredBuildScenes = EditorBuildSettings.scenes;
-            List<string> includedScenes = new List<string>();
+            var includedScenes = new List<string>();
 
             for (int i = 0; i < editorConfiguredBuildScenes.Length; i++)
             {
@@ -45,7 +38,7 @@ public static class AzurePipelinesBuild
 #if UNITY_2018_1_OR_NEWER
             BuildReport buildReport = default(BuildReport);
 #else
-                    string buildReport = "ERROR";
+            string buildReport = "ERROR";
 #endif
 
             buildReport = BuildPipeline.BuildPlayer(new BuildPlayerOptions
@@ -71,14 +64,14 @@ public static class AzurePipelinesBuild
                     break;
             }
 #else
-                    if (buildReport.StartsWith("Error"))
-                    {
-                        EditorApplication.Exit(1);
-                    }
-                    else
-                    {
-                        EditorApplication.Exit(0);
-                    }
+            if (buildReport.StartsWith("Error"))
+            {
+                EditorApplication.Exit(1);
+            }
+            else
+            {
+                EditorApplication.Exit(0);
+            }
 #endif
         }
         catch (Exception ex) when (ex is Exception)
