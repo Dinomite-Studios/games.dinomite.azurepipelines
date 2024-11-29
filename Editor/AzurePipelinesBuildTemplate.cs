@@ -10,8 +10,8 @@ using UnityEditor.Build.Reporting;
 
 public static class AzurePipelinesBuild
 {
-    private const string OutputFileNameArgument = "outputFileName";
-    private const string OutputPathArgument = "outputPath";
+    private const string OutputFileNameArgument = "-outputFileName";
+    private const string OutputPathArgument = "-outputPath";
 
     public static void PerformBuild()
     {
