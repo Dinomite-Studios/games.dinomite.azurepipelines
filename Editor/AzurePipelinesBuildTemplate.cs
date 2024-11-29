@@ -24,21 +24,23 @@ public static class AzurePipelinesBuild
 
         try
         {
-            EditorBuildSettingsScene[] editorConfiguredBuildScenes = EditorBuildSettings.scenes;
+            var editorConfiguredBuildScenes = EditorBuildSettings.scenes;
             var includedScenes = new List<string>();
 
             for (int i = 0; i < editorConfiguredBuildScenes.Length; i++)
             {
                 if (editorConfiguredBuildScenes[i].enabled == false)
+                {
                     continue;
+                }
 
                 includedScenes.Add(editorConfiguredBuildScenes[i].path);
             }
 
 #if UNITY_2018_1_OR_NEWER
-            BuildReport buildReport = default(BuildReport);
+            BuildReport buildReport = default;
 #else
-            string buildReport = "ERROR";
+            var buildReport = "ERROR";
 #endif
 
             buildReport = BuildPipeline.BuildPlayer(new BuildPlayerOptions
@@ -60,6 +62,7 @@ public static class AzurePipelinesBuild
                 case BuildResult.Failed:
                 case BuildResult.Cancelled:
                 default:
+                    Debug.LogError($"BUILD FAILED: {buildReport.summary.result}\n{buildReport.summary}");
                     EditorApplication.Exit(1);
                     break;
             }
@@ -74,9 +77,9 @@ public static class AzurePipelinesBuild
             }
 #endif
         }
-        catch (Exception ex) when (ex is Exception)
+        catch (Exception ex)
         {
-            Debug.Log("BUILD FAILED: " + ex.Message);
+            Debug.LogError("BUILD FAILED: " + ex.Message);
             EditorApplication.Exit(1);
         }
     }
@@ -100,11 +103,13 @@ public static class AzurePipelinesBuild
                 return string.Format("{0}.app", outputFileName);
             case BuildTarget.iOS:
             case BuildTarget.tvOS:
+#if !UNITY_2019_2_OR_NEWER
             case BuildTarget.StandaloneLinux:
+            case BuildTarget.StandaloneLinuxUniversal:
+#endif
             case BuildTarget.WebGL:
             case BuildTarget.WSAPlayer:
             case BuildTarget.StandaloneLinux64:
-            case BuildTarget.StandaloneLinuxUniversal:
 #if !UNITY_2018_3_OR_NEWER
                     case BuildTarget.PSP2:    
 #endif
