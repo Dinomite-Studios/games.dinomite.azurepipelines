@@ -18,6 +18,7 @@ public static class AzurePipelinesBuild
         if (!Dinomite.AzurePipelines.Utilities.TryGetCommandLineArgumentValue(OutputPathArgument, out var locationPathName) ||
             !Dinomite.AzurePipelines.Utilities.TryGetCommandLineArgumentValue(OutputFileNameArgument, out var outputFileName))
         {
+            Debug.LogError($"BUILD FAILED: Required command line arguments {OutputPathArgument}, {OutputFileNameArgument} not set.");
             EditorApplication.Exit(1);
             return;
         }
