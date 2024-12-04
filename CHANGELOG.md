@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.11]
+
+### Added
+
+- Added handling CLI arguments `-keystoreName`, `-keystorePass`, `-keystoreAliasName` and `-keystoreAliasPass` to perform signing for Android builds
+
 ## [1.0.10]
 
 ### Fixed
