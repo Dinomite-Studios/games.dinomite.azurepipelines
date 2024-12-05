@@ -16,6 +16,7 @@ public static class AzurePipelinesBuild
     private const string AndroidKeystorePassArgument = "-keystorePass";
     private const string AndroidKeystoreAliasNameArgument = "-keystoreAliasName";
     private const string AndroidKeystoreAliasPassArgument = "-keystoreAliasPass";
+    private const string AndroidBuildAppBundleArgument = "-buildAppBundle";
 
     public static void PerformBuild()
     {
@@ -27,9 +28,9 @@ public static class AzurePipelinesBuild
             return;
         }
 
-        // When building for Android, check for custom keystore signing credentials and apply them prior to building the project.
         if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android)
         {
+            // When building for Android, check for custom keystore signing credentials and apply them prior to building the project.
             if (Dinomite.AzurePipelines.Utilities.TryGetCommandLineArgumentValue(AndroidKeystoreNameArgument, out var androidKeystoreName) &&
             Dinomite.AzurePipelines.Utilities.TryGetCommandLineArgumentValue(AndroidKeystorePassArgument, out var androidKeystorePass) &&
             Dinomite.AzurePipelines.Utilities.TryGetCommandLineArgumentValue(AndroidKeystoreAliasNameArgument, out var androidKeystoreAliasName))
@@ -49,6 +50,9 @@ public static class AzurePipelinesBuild
                 // would cause the build to fail.
                 PlayerSettings.Android.useCustomKeystore = false;
             }
+
+            // When building for Android, we might want to build an .aab for the Play Store instead of an .apk file.
+            EditorUserBuildSettings.buildAppBundle = Dinomite.AzurePipelines.Utilities.CommandLineArgumentExists(AndroidBuildAppBundleArgument);
         }
 
         try
@@ -118,7 +122,7 @@ public static class AzurePipelinesBuild
         switch (EditorUserBuildSettings.activeBuildTarget)
         {
             case BuildTarget.Android:
-                return string.Format("{0}.apk", outputFileName);
+                return string.Format("{0}.{1}", outputFileName, EditorUserBuildSettings.buildAppBundle ? "aab" : "apk");
             case BuildTarget.StandaloneWindows64:
             case BuildTarget.StandaloneWindows:
                 return string.Format("{0}.exe", outputFileName);
