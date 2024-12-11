@@ -15,7 +15,7 @@ stages:
     displayName: Build using Unity 2021 LTS
     steps:
     - checkout: self
-      path: Packages/games.dinomite.azurepipelines
+      path: $(Pipeline.Workspace)/s/Packages/games.dinomite.azurepipelines
     - task: UnitySetupTask@2
       inputs:
         versionSelectionMode: 'specify'
@@ -24,6 +24,7 @@ stages:
     - task: UnityCreateProjectTask@1
       inputs:
         version: '$(unity-2021-version)'
+        path: '$(Pipeline.Workspace)/s'
         projectName: 'New Project'
     - task: UnityBuildTask@3
       inputs:
@@ -41,7 +42,7 @@ stages:
     displayName: Build using Unity 2022 LTS
     steps:
     - checkout: self
-      path: Packages/games.dinomite.azurepipelines
+      path: $(Pipeline.Workspace)/s/Packages/games.dinomite.azurepipelines
     - task: UnitySetupTask@2
       inputs:
         versionSelectionMode: 'specify'
@@ -50,6 +51,7 @@ stages:
     - task: UnityCreateProjectTask@1
       inputs:
         version: '$(unity-2022-version)'
+        path: '$(Pipeline.Workspace)/s'
         projectName: 'New Project'
     - task: UnityBuildTask@3
       inputs:
@@ -67,7 +69,7 @@ stages:
     displayName: Build using Unity 6 LTS
     steps:
     - checkout: self
-      path: Packages/games.dinomite.azurepipelines
+      path: $(Pipeline.Workspace)/s/Packages/games.dinomite.azurepipelines
     - task: UnitySetupTask@2
       inputs:
         versionSelectionMode: 'specify'
@@ -76,6 +78,7 @@ stages:
     - task: UnityCreateProjectTask@1
       inputs:
         version: '$(unity-6-version)'
+        path: '$(Pipeline.Workspace)/s'
         projectName: 'New Project'
     - task: UnityBuildTask@3
       inputs:
