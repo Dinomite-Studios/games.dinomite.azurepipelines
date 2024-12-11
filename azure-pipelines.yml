@@ -1,0 +1,86 @@
+trigger:
+- main
+- development
+
+variables:
+- group: unity-lts-versions
+
+stages:
+- stage: Unity2021Stage
+  displayName: Unity 2021 LTS
+  pool:
+    name: Unity Windows
+  jobs:
+  - job: BuildUnity2021Job
+    displayName: Build using Unity 2021 LTS
+    steps:
+    - checkout: self
+      path: Packages/games.dinomite.azurepipelines
+    - task: UnitySetupTask@2
+      inputs:
+        versionSelectionMode: 'specify'
+        version: '$(unity-2021-version)'
+        revision: '$(unity-2021-revision)'
+    - task: UnityCreateProjectTask@1
+      inputs:
+        version: '$(unity-2021-version)'
+        projectName: 'New Project'
+    - task: UnityBuildTask@3
+      inputs:
+        versionSelectionMode: 'specify'
+        version: '$(unity-2021-version)'
+        buildTarget: 'standalone'
+        outputPath: '$(Build.BinariesDirectory)'
+        outputFileName: 'drop'
+- stage: Unity2022Stage
+  displayName: Unity 2022 LTS
+  pool:
+    name: Unity Windows
+  jobs:
+  - job: BuildUnity2022Job
+    displayName: Build using Unity 2022 LTS
+    steps:
+    - checkout: self
+      path: Packages/games.dinomite.azurepipelines
+    - task: UnitySetupTask@2
+      inputs:
+        versionSelectionMode: 'specify'
+        version: '$(unity-2022-version)'
+        revision: '$(unity-2022-revision)'
+    - task: UnityCreateProjectTask@1
+      inputs:
+        version: '$(unity-2022-version)'
+        projectName: 'New Project'
+    - task: UnityBuildTask@3
+      inputs:
+        versionSelectionMode: 'specify'
+        version: '$(unity-2022-version)'
+        buildTarget: 'standalone'
+        outputPath: '$(Build.BinariesDirectory)'
+        outputFileName: 'drop'
+- stage: Unity6Stage
+  displayName: Unity 6 LTS
+  pool:
+    name: Unity Windows
+  jobs:
+  - job: BuildUnity6Job
+    displayName: Build using Unity 6 LTS
+    steps:
+    - checkout: self
+      path: Packages/games.dinomite.azurepipelines
+    - task: UnitySetupTask@2
+      inputs:
+        versionSelectionMode: 'specify'
+        version: '$(unity-6-version)'
+        revision: '$(unity-6-revision)'
+    - task: UnityCreateProjectTask@1
+      inputs:
+        version: '$(unity-6-version)'
+        projectName: 'New Project'
+    - task: UnityBuildTask@3
+      inputs:
+        versionSelectionMode: 'specify'
+        version: '$(unity-6-version)'
+        buildTarget: 'standalone'
+        outputPath: '$(Build.BinariesDirectory)'
+        outputFileName: 'drop'
