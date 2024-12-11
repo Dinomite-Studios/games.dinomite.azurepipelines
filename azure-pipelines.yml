@@ -30,6 +30,7 @@ stages:
       inputs:
         versionSelectionMode: 'specify'
         version: '$(unity-2021-version)'
+        unityProjectPath: '$(Pipeline.Workspace)/s/New Project'
         buildTarget: 'standalone'
         outputPath: '$(Build.BinariesDirectory)'
         outputFileName: 'drop'
@@ -57,6 +58,7 @@ stages:
       inputs:
         versionSelectionMode: 'specify'
         version: '$(unity-2022-version)'
+        unityProjectPath: '$(Pipeline.Workspace)/s/New Project'
         buildTarget: 'standalone'
         outputPath: '$(Build.BinariesDirectory)'
         outputFileName: 'drop'
@@ -84,6 +86,7 @@ stages:
       inputs:
         versionSelectionMode: 'specify'
         version: '$(unity-6-version)'
+        unityProjectPath: '$(Pipeline.Workspace)/s/New Project'
         buildTarget: 'standalone'
         outputPath: '$(Build.BinariesDirectory)'
         outputFileName: 'drop'
